@@ -1,0 +1,17 @@
+<div class="col-sm-6">
+  <div class="popover-title">Employee - List</div>
+  <table class="table" width="100%">
+    <thead>
+    <tr style="background-color: beige;">
+      <td>Name</td>
+      <td>Email</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of employeeList;" (click)="onSelect(item);" style="cursor:pointer;">
+      <td>{{item.name}}</td>
+      <td>{{item.email}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

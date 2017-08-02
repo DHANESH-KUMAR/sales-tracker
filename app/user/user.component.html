@@ -1,0 +1,64 @@
+﻿<div class="container-fluid">
+  <div class="row">
+    <h4>Add User</h4>
+  </div>
+  <div class="col-sm-5">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value,myForm.valid)">
+
+      <div class="form-group">
+        <label class="control-label">Name</label>
+        <input type="text" formControlName="name" class="form-control"/>
+        <small
+          [hidden]="myForm.controls.name.valid || (myForm.controls.name.pristine && !submitted)">
+          Name is required (minimum 5 characters).
+        </small>
+      </div>
+
+      <div formGroupName="address" class="form-group">
+        <label class="control-lable">Address</label>
+        <input type="text" formControlName="street" class="form-control"/>
+        <small
+          [hidden]="myForm.controls.address.controls.street.valid ||(myForm.controls.address.controls.street.pristine && !submitted) ">
+          street required
+        </small>
+      </div>
+
+      <div formGroupName="address" class="form-group">
+        <label class="control-label">Postcode</label>
+        <input type="text" formControlName="postcode" class="form-control"/>
+      </div>
+
+      <button type="submit" [disabled]="!myForm.valid" class="btn btn-default">Submit</button>
+      <a  (click)="cancelUser();" class="btn btn-default">Cancel</a>
+
+    </form>
+  </div>
+
+  <div class="col-sm-7">
+
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <td>Name</td>
+        <td>Address</td>
+        <td>PostCode</td>
+        <td></td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let it of userList;let in=index">
+        <td>{{it.name}}</td>
+        <td>{{it.address.street}}</td>
+        <td>{{it.address.postcode}}</td>
+        <td>
+          <i style="cursor:pointer" class="fa fa-edit" (click)="editUser(it)"></i>&nbsp;
+          <i style="cursor:pointer" class="fa fa-remove" (click)="deleteUser(it)"></i>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+
+</div>
